@@ -1,9 +1,8 @@
-from __future__ import annotations
-
 import logging
 import shlex
 import subprocess
 
+from typing import Any
 
 class BumprError(Exception):
     pass
@@ -16,7 +15,7 @@ def check_output(*args, **kwargs):
     )
 
 
-def execute(command, verbose=False, replacements=None, dryrun=False):
+def execute(command, verbose: bool=False, replacements=None, dryrun: bool=False):
     logger = logging.getLogger(__name__)
     replacements = replacements or {}
     if not command:
@@ -29,7 +28,9 @@ def execute(command, verbose=False, replacements=None, dryrun=False):
             commands.append([part.format(**replacements) for part in cmd])
     else:
         command = command.format(**replacements)
-        commands = [shlex.split(cmd.strip()) for cmd in command.splitlines() if cmd.strip()]
+        commands = [
+            shlex.split(cmd.strip()) for cmd in command.splitlines() if cmd.strip()
+        ]
 
     output = ""
     for cmd in commands:
@@ -45,7 +46,9 @@ def execute(command, verbose=False, replacements=None, dryrun=False):
                 print(exception.output)
             cmd = " ".join(cmd) if isinstance(cmd, (list, tuple)) else cmd
             raise BumprError(
-                'Command "{0}" failed with exit code {1}'.format(cmd, exception.returncode)
+                'Command "{0}" failed with exit code {1}'.format(
+                    cmd, exception.returncode
+                )
             )
     return output
 
@@ -56,15 +59,15 @@ class ObjectDict(dict):
     def __init__(self, *args, **kwargs):
         self.update(*args, **kwargs)
 
-    def __getattr__(self, key):
+    def __getattr__(self, key: str):
         return self[key]
 
-    def __setattr__(self, key, value):
+    def __setattr__(self, key: str, value: Any) -> None:
         if isinstance(value, dict) and not isinstance(value, ObjectDict):
             value = ObjectDict(value)
         self[key] = value
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key: str, value):
         if isinstance(value, dict) and not isinstance(value, ObjectDict):
             value = ObjectDict(value)
         super(ObjectDict, self).__setitem__(key, value)
