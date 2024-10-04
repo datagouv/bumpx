@@ -37,7 +37,7 @@ class Workspace:
         """,
         )
 
-    def write(self, filename, content):
+    def write(self, filename: str, content):
         target = self.root / filename
         # wksp_filename = os.path.join(self.root, filename)
         with target.open("wb") as f:
@@ -45,7 +45,7 @@ class Workspace:
             f.write(content.encode("utf8"))
         return target
 
-    def mkdir(self, dirname):
+    def mkdir(self, dirname: str) -> None:
         # wksp_dirname = os.path.join(self.root, dirname)
         try:
             self.root.mkdir(dirname)
