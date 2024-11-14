@@ -22,7 +22,7 @@ Bump'X intend to be customizable with the following features:
 
 ## Compatibility
 
-Bump'X requires Python `>=3.7` (and `<4.0`)
+Bump'X requires Python `>=3.9` (and `<4.0`)
 
 ## Installation
 

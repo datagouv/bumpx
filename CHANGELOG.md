@@ -6,6 +6,7 @@
 - Update some dependencies
 - Add [Ruff](https://astral.sh/ruff) as the linter, formatter and import sorter, to replace flake8, black and isort, while keeping the same linting and formatting rules as before (standard flake8/black rules, with extended line length)
 - Update pre-commit hooks to use [Ruff](https://astral.sh/ruff)
+- Supports Python `>=3.9,<4.0`
 
 ## 0.3.8 (2021-11-01)
 
