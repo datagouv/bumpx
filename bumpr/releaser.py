@@ -194,7 +194,7 @@ class Releaser:
                         )
                     )
             else:
-                logger.debug("Tag: %s", self.tag_label)
+                logger.debug(f"Tag: {self.tag_label}")
                 if not self.config.dryrun:
                     self.vcs.tag(self.tag_label)
                 else:
@@ -202,7 +202,7 @@ class Releaser:
 
     def commit(self, message):
         if self.config.commit:
-            logger.debug("Commit: %s", message)
+            logger.debug(f"Commit: {message}")
             if not self.config.dryrun:
                 self.vcs.commit(message)
             else:
