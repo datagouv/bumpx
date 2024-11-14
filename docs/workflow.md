@@ -1,6 +1,6 @@
 # Workflow
 
-When you execute Bump'R it will follow the following workflow:
+When you execute Bump'X it will follow the following workflow:
 
 1. clean
 2. test
@@ -12,15 +12,15 @@ If you have been using Maven, it's inspired by the Maven Release Plugin.
 
 ## Clean phase
 
-Optionnal phase that simply execute the commands provided by the `clean` configuration parameter.
+Optional phase that simply execute the commands provided by the `clean` configuration parameter.
 
 ## Test phase
 
-Optionnal phase that simply execute the commands provided by the `tests` configuration parameter.
+Optional phase that simply execute the commands provided by the `tests` configuration parameter.
 
 ## Bump phase
 
-This is the main phase in which Bump'R will:
+This is the main phase in which Bump'X will:
 
 1. Compute replacements
 2. Execute the bump phase for each hook
@@ -30,7 +30,7 @@ This is the main phase in which Bump'R will:
 
 ## Publish phase
 
-Optionnal phase that simply execute the commands provided by the `publish` configuration parameter.
+Optional phase that simply execute the commands provided by the `publish` configuration parameter.
 
 Most of the time for Python project, you will want to execute:
 
@@ -40,7 +40,7 @@ python setup.py sdist register upload
 
 ## Prepare phase
 
-This is the second main phase in which Bump'R will:
+This is the second main phase in which Bump'X will:
 
 1. Compute replacements
 2. Execute the prepare phase for each hook

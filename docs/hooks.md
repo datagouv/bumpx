@@ -82,7 +82,7 @@ prepare = In development
 empty = Empty
 ```
 
-If you execute Bump'R, the changelog will be bumped like:
+If you execute Bump'X, the changelog will be bumped like:
 
 ```rst
 Changelog
