@@ -2,7 +2,9 @@ import logging
 import re
 from datetime import datetime
 from difflib import unified_diff
+from typing import Optional
 
+from .forge import FORGES
 from .helpers import BumprError, execute
 from .hooks import HOOKS
 from .vcs import VCS
@@ -25,29 +27,32 @@ class Releaser:
                 version_string = match.group("version")
                 self.prev_version = Version.parse(version_string)
             except Exception:
-                raise BumprError("Unable to extract version from {0}".format(config.file))
+                raise BumprError(f"Unable to extract version from {config.file}")
 
-        logger.debug("Previous version: {0}".format(self.prev_version))
+        logger.debug(f"Previous version: {self.prev_version}")
 
         self.version = self.prev_version.copy()
         self.version.bump(config.bump.part, config.bump.unsuffix, config.bump.suffix)
-        logger.debug("Bumped version: {0}".format(self.version))
+        logger.debug(f"Bumped version: {self.version}")
 
         self.next_version = self.version.copy()
         self.next_version.bump(config.prepare.part, config.prepare.unsuffix, config.prepare.suffix)
-        logger.debug("Prepared version: {0}".format(self.next_version))
+        logger.debug(f"Prepared version: {self.next_version}")
 
         self.tag_label = self.config.tag_format.format(version=self.version)
-        logger.debug("Tag: {0}".format(self.tag_label))
+        logger.debug(f"Tag: {self.tag_label}")
         if self.config.tag_annotation:
             self.tag_annotation = self.config.tag_annotation.format(version=self.version)
-            logger.debug("Tag annotation: {0}".format(self.tag_annotation))
+            logger.debug(f"Tag annotation: {self.tag_annotation}")
 
         self.timestamp = None
 
         if config.vcs:
             self.vcs = VCS[config.vcs](verbose=config.verbose)
             self.vcs.validate(dryrun=config.dryrun)
+
+        if config.forge:
+            self.forge = FORGES[config.forge](verbose=config.verbose)
 
         if config.dryrun:
             self.modified = {}
@@ -170,10 +175,13 @@ class Releaser:
             self.perform(filename, before, after)
 
     def publish(self):
-        """Publish the current release to PyPI"""
+        """Publish the current release to PyPI and to the Forge if defined"""
         if self.config.publish:
             logger.info("Publish")
             self.execute(self.config.publish)
+
+            if self.config.forge:
+                self.create_forge_release()  # TODO: get the release notes from the changelog hook
 
     def tag(self):
         if self.config.commit and self.config.tag:
@@ -182,15 +190,27 @@ class Releaser:
                 if not self.config.dryrun:
                     self.vcs.tag(self.tag_label, self.tag_annotation)
                 else:
-                    logger.dryrun(
-                        "tag: {0} annotation: {1}".format(self.tag_label, self.tag_annotation)
-                    )
+                    logger.dryrun(f"tag: {self.tag_label} annotation: {self.tag_annotation}")
             else:
                 logger.debug(f"Tag: {self.tag_label}")
                 if not self.config.dryrun:
                     self.vcs.tag(self.tag_label)
                 else:
-                    logger.dryrun("tag: {0}".format(self.tag_label))
+                    logger.dryrun(f"tag: {self.tag_label}")
+
+    def create_forge_release(self, notes: Optional[str] = None) -> None:
+        if self.config.tag:
+            if notes:
+                logger.debug(f"Forge release: {self.tag_label} with notes")
+            else:
+                logger.debug(f"Forge release: {self.tag_label}")
+            if not self.config.dryrun:
+                self.forge.release(version=self.tag_label, notes=notes)
+            else:
+                if notes:
+                    logger.dryrun(f"Forge release: {self.tag_label} with notes")  # type: ignore
+                else:
+                    logger.dryrun(f"Forge release: {self.tag_label}")  # type: ignore
 
     def commit(self, message):
         if self.config.commit:
@@ -198,7 +218,7 @@ class Releaser:
             if not self.config.dryrun:
                 self.vcs.commit(message)
             else:
-                logger.dryrun("commit: {0}".format(message))
+                logger.dryrun(f"commit: {message}")
 
     def push(self):
         if self.config.vcs and self.config.commit and self.config.push:
