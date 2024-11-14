@@ -28,7 +28,7 @@ Bump'X requires Python `>=3.7` (and `<4.0`)
 
 You can install Bump'X with pip:
 
-```console
+```bash
 pip install bumpr
 ```
 
@@ -36,7 +36,7 @@ pip install bumpr
 
 You can use directly the command line to setup every parameter:
 
-```console
+```bash
 bumpr fake/__init__.py README.rst -M -ps dev
 ```
 
@@ -80,7 +80,7 @@ id = fake
 This way you only have to specify which part you want to bump on the
 command line:
 
-```console
+```bash
 bumpr -M  # Bump the major
 bumpr     # Bump the default part aka. patch
 ```
