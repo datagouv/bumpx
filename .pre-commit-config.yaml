@@ -14,7 +14,7 @@ repos:
       - id: check-shebang-scripts-are-executable
   - # Sorted imports
     repo: https://github.com/pycqa/isort
-    rev: 5.9.3
+    rev: 5.13.2
     hooks:
       - id: isort
         name: isort (python)
