@@ -1,11 +1,8 @@
 import logging
 from os.path import exists
-from typing import TYPE_CHECKING
+from typing import Optional
 
 from .helpers import BumprError, execute
-
-if TYPE_CHECKING:
-    from typing import Optional
 
 logger = logging.getLogger(__name__)
 
