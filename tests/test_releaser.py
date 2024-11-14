@@ -416,7 +416,7 @@ def test_release_dryrun(workspace, mocker):
         }
     )
     releaser = Releaser(config)
-    execute = mocker.patch("x.releaser.execute")
+    execute = mocker.patch("bumpx.releaser.execute")
     vcs = mocker.patch.object(releaser, "vcs")
     releaser.release()
     assert not execute.called
