@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import logging
 import re
 from datetime import datetime
@@ -27,7 +25,9 @@ class Releaser:
                 version_string = match.group("version")
                 self.prev_version = Version.parse(version_string)
             except Exception:
-                raise BumprError("Unable to extract version from {0}".format(config.file))
+                raise BumprError(
+                    "Unable to extract version from {0}".format(config.file)
+                )
 
         logger.debug("Previous version: {0}".format(self.prev_version))
 
@@ -36,13 +36,17 @@ class Releaser:
         logger.debug("Bumped version: {0}".format(self.version))
 
         self.next_version = self.version.copy()
-        self.next_version.bump(config.prepare.part, config.prepare.unsuffix, config.prepare.suffix)
+        self.next_version.bump(
+            config.prepare.part, config.prepare.unsuffix, config.prepare.suffix
+        )
         logger.debug("Prepared version: {0}".format(self.next_version))
 
         self.tag_label = self.config.tag_format.format(version=self.version)
         logger.debug("Tag: {0}".format(self.tag_label))
         if self.config.tag_annotation:
-            self.tag_annotation = self.config.tag_annotation.format(version=self.version)
+            self.tag_annotation = self.config.tag_annotation.format(
+                version=self.version
+            )
             logger.debug("Tag annotation: {0}".format(self.tag_annotation))
 
         self.timestamp = None
@@ -92,7 +96,7 @@ class Releaser:
             self.execute(self.config.tests, verbose=True)
 
     def bump(self):
-        logger.info("Bump version %s", self.version)
+        logger.info(f"Bump version {self.version}")
 
         replacements = [(str(self.prev_version), str(self.version))]
 
@@ -120,7 +124,7 @@ class Releaser:
         if self.version == self.next_version:
             logger.info("Skip prepare phase")
             return
-        logger.info("Prepare version %s", self.next_version)
+        logger.info(f"Prepare version {self.next_version}")
 
         replacements = [(str(self.version), str(self.next_version))]
 
@@ -180,15 +184,17 @@ class Releaser:
     def tag(self):
         if self.config.commit and self.config.tag:
             if self.config.tag_annotation:
-                logger.debug("Tag: %s Annotation: %s", self.tag_label, self.tag_annotation)
+                logger.debug(f"Tag: {self.tag_label} Annotation: {self.tag_annotation}")
                 if not self.config.dryrun:
                     self.vcs.tag(self.tag_label, self.tag_annotation)
                 else:
                     logger.dryrun(
-                        "tag: {0} annotation: {1}".format(self.tag_label, self.tag_annotation)
+                        "tag: {0} annotation: {1}".format(
+                            self.tag_label, self.tag_annotation
+                        )
                     )
             else:
-                logger.debug("Tag: %s", self.tag_label)
+                logger.debug(f"Tag: {self.tag_label}")
                 if not self.config.dryrun:
                     self.vcs.tag(self.tag_label)
                 else:
@@ -196,7 +202,7 @@ class Releaser:
 
     def commit(self, message):
         if self.config.commit:
-            logger.debug("Commit: %s", message)
+            logger.debug(f"Commit: {message}")
             if not self.config.dryrun:
                 self.vcs.commit(message)
             else:

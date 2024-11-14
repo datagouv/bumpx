@@ -1,12 +1,12 @@
-from __future__ import annotations
-
 import re
 
 
 class Version:
     MAJOR, MINOR, PATCH = range(3)
 
-    PATTERN = re.compile(r"(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(\.(?P<suffix>[\w\d.]+))?")
+    PATTERN = re.compile(
+        r"(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(\.(?P<suffix>[\w\d.]+))?"
+    )
     FORMAT = r"{major}.{minor}.{patch}"
     FORMAT_SUFFIXED = r"{major}.{minor}.{patch}.{suffix}"
 
@@ -16,7 +16,7 @@ class Version:
         self.patch = int(patch)
         self.suffix = suffix
 
-    def bump(self, part=None, unsuffix=True, suffix=None):
+    def bump(self, part=None, unsuffix: bool=True, suffix=None):
         if part is Version.MAJOR:
             self.major += 1
             self.minor = 0
@@ -43,9 +43,11 @@ class Version:
         return pattern.format(**self.__dict__)
 
     @classmethod
-    def parse(cls, string):
+    def parse(cls, string: str) -> "Version" | None:
         match = cls.PATTERN.match(string)
-        return cls(**match.groupdict())
+        if match:
+            return cls(**match.groupdict())
+        return None
 
     __str__ = __unicode__
 
