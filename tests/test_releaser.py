@@ -1,9 +1,9 @@
 import pytest
 
-from bumpr.config import Config
-from bumpr.helpers import BumprError
-from bumpr.releaser import Releaser
-from bumpr.version import Version
+from bumpx.config import Config
+from bumpx.helpers import BumprError
+from bumpx.releaser import Releaser
+from bumpx.version import Version
 
 
 def test_constructor(workspace):

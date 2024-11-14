@@ -4,7 +4,7 @@ import pytest
 
 
 def pytest_configure():
-    from bumpr import log
+    from bumpx import log
 
     log.init()
 
