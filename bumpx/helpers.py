@@ -1,7 +1,7 @@
 import logging
 import shlex
 import subprocess
-from typing import Any
+from typing import Any, Optional
 
 
 class BumprError(Exception):
@@ -15,11 +15,13 @@ def check_output(*args, **kwargs):
     )
 
 
-def execute(command, verbose: bool = False, replacements=None, dryrun: bool = False):
+def execute(
+    command, verbose: bool = False, replacements=None, dryrun: bool = False
+) -> Optional[str]:
     logger = logging.getLogger(__name__)
     replacements = replacements or {}
     if not command:
-        return
+        return None
     elif isinstance(command, (list, tuple)):
         if not isinstance(command[0], (list, tuple)):
             command = [command]
@@ -34,7 +36,7 @@ def execute(command, verbose: bool = False, replacements=None, dryrun: bool = Fa
     for cmd in commands:
         try:
             if dryrun:
-                logger.dryrun("execute: {0}".format(" ".join(cmd)))
+                logger.dryrun("execute: {0}".format(" ".join(cmd)))  # type: ignore
             elif verbose:
                 subprocess.check_call(cmd)
             else:
@@ -52,10 +54,10 @@ def execute(command, verbose: bool = False, replacements=None, dryrun: bool = Fa
 class ObjectDict(dict):
     """A dictionnary with object-like attribute access and depp merge"""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         self.update(*args, **kwargs)
 
-    def __getattr__(self, key: str):
+    def __getattr__(self, key: str) -> str:
         return self[key]
 
     def __setattr__(self, key: str, value: Any) -> None:
@@ -63,18 +65,18 @@ class ObjectDict(dict):
             value = ObjectDict(value)
         self[key] = value
 
-    def __setitem__(self, key: str, value):
+    def __setitem__(self, key: str, value) -> None:
         if isinstance(value, dict) and not isinstance(value, ObjectDict):
             value = ObjectDict(value)
         super(ObjectDict, self).__setitem__(key, value)
 
-    def update(self, *args, **kwargs):
+    def update(self, *args, **kwargs) -> None:
         for key, value in dict(*args, **kwargs).items():
             if isinstance(value, dict) and not isinstance(value, ObjectDict):
                 value = ObjectDict(value)
             self[key] = value
 
-    def merge(self, *args, **kwargs):
+    def merge(self, *args, **kwargs) -> None:
         for key, value in dict(*args, **kwargs).items():
             if isinstance(value, dict):
                 if not isinstance(value, ObjectDict):

@@ -1,4 +1,5 @@
 import re
+from typing import Optional
 
 
 class Version:
@@ -41,7 +42,7 @@ class Version:
         return pattern.format(**self.__dict__)
 
     @classmethod
-    def parse(cls, string: str) -> "Version" | None:
+    def parse(cls, string: str) -> Optional["Version"]:
         match = cls.PATTERN.match(string)
         if match:
             return cls(**match.groupdict())

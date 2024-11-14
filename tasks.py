@@ -1,5 +1,6 @@
 import os
 import sys
+from typing import Optional
 
 from invoke import task
 
@@ -35,7 +36,7 @@ FORMATTERS = (
 
 def color(code: str) -> str:
     """A simple ANSI color wrapper factory"""
-    return lambda t: "\033[{0}{1}\033[0;m".format(code, t)
+    return lambda t: "\033[{0}{1}\033[0;m".format(code, t)  # type: ignore
 
 
 green = color("1;32m")
@@ -48,30 +49,30 @@ white = color("1;39m")
 
 def header(text: str) -> None:
     """Display an header"""
-    print(" ".join((blue(">>"), cyan(text))))
+    print(" ".join((blue(">>"), cyan(text))))  # type: ignore
     sys.stdout.flush()
 
 
 def info(text: str, *args, **kwargs) -> None:
     """Display informations"""
     text = text.format(*args, **kwargs)
-    print(" ".join((purple(">>>"), text)))
+    print(" ".join((purple(">>>"), text)))  # type: ignore
     sys.stdout.flush()
 
 
 def success(text: str) -> None:
     """Display a success message"""
-    print(" ".join((green("✔"), white(text))))
+    print(" ".join((green("✔"), white(text))))  # type: ignore
     sys.stdout.flush()
 
 
 def error(text: str) -> None:
     """Display an error message"""
-    print(red("✘ {0}".format(text)))
+    print(red("✘ {0}".format(text)))  # type: ignore
     sys.stdout.flush()
 
 
-def exit(text: str | None = None, code=-1) -> None:
+def exit(text: Optional[str] = None, code=-1) -> None:
     if text:
         error(text)
     sys.exit(code)
@@ -96,8 +97,8 @@ def test(ctx: str, report: bool = False, verbose: bool = False):
         cmd.append("-v")
     if report:
         cmd.append("--junitxml=reports/tests.xml")
-    with ctx.cd(ROOT):
-        ctx.run(" ".join(cmd), pty=PTY)
+    with ctx.cd(ROOT):  # type: ignore
+        ctx.run(" ".join(cmd), pty=PTY)  # type: ignore
 
 
 @task
