@@ -31,7 +31,7 @@ The community looks forward to your contributions. 🎉
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the
-[bumpr Code of Conduct](https://github.com/datagouv/bumpx/blob/master/CODE_OF_CONDUCT.md).
+[bumpr Code of Conduct](https://github.com/datagouv/bumpx/blob/main/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behavior
 to <>.
 

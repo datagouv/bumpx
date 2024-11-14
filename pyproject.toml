@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "bumpr"
+name = "bumpx"
 version = "0.3.9.dev"
 description = "Version bumper and Python package releaser"
-authors = ["Axel H. <noirbizarre@gmail.com>"]
+authors = ["data.gouv.fr <opendatateam@data.gouv.fr>"]
 license = "LGPL"
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -87,24 +87,9 @@ markers = [
   "version: specify a defined version"
 ]
 
-[tool.isort]
-# See: https://pycqa.github.io/isort/docs/configuration/black_compatibility/
-profile = "black"
-multi_line_output = 3
-
-
 [tool.mypy]
 python_version = "3.11"
 exclude = "doc/*.py"
-
-[tool.flakehell]
-max-line-length = 110
-exclude = [
-  "doc",
-  "build",
-  "dist",
-  ".git",
-]
 
 [tool.coverage.run]
 source = ["bumpr"]

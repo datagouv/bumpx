@@ -1,11 +1,11 @@
 # Bump'X: Bump and release versions
 
-[![Build Status](https://github.com/datagouv/bumpx/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/datagouv/bumpx/actions/workflows/main.yml)
+[![Build Status](https://github.com/datagouv/bumpx/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/datagouv/bumpx/actions/workflows/main.yml)
 ![PyPI - Last version](https://img.shields.io/pypi/v/bumpx)
 ![PyPI - License](https://img.shields.io/pypi/l/bumpx)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/bumpx)
 
-Bump'X is a version bumper and releaser forked from [Bump'R](https://github.com/datagouv/bumpx).
+Bump'X is a version bumper and releaser forked from [Bump'R](https://github.com/noirbizarre/bumpr).
 In a single CLI command, Bump'X can:
 
 - Clean-up release artifact
