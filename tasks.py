@@ -1,5 +1,6 @@
 import os
 import sys
+from typing import Optional
 
 from invoke import task
 
@@ -71,7 +72,7 @@ def error(text: str) -> None:
     sys.stdout.flush()
 
 
-def exit(text: str | None = None, code=-1) -> None:
+def exit(text: Optional[str] = None, code=-1) -> None:
     if text:
         error(text)
     sys.exit(code)

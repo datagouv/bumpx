@@ -1,7 +1,7 @@
 import logging
 import shlex
 import subprocess
-from typing import Any
+from typing import Any, Optional
 
 
 class BumprError(Exception):
@@ -15,7 +15,9 @@ def check_output(*args, **kwargs):
     )
 
 
-def execute(command, verbose: bool = False, replacements=None, dryrun: bool = False) -> str | None:
+def execute(
+    command, verbose: bool = False, replacements=None, dryrun: bool = False
+) -> Optional[str]:
     logger = logging.getLogger(__name__)
     replacements = replacements or {}
     if not command:
