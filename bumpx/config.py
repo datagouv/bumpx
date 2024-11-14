@@ -68,8 +68,9 @@ class BumprConfigParser(RawConfigParser):
         for section in self.candidate_sections(section):
             if RawConfigParser.has_section(self, section):
                 return RawConfigParser.options(self, section)
+        return []
 
-    def has_option(self, section, option):
+    def has_option(self, section, option) -> bool:
         sections = self.candidate_sections(section)
         return any(RawConfigParser.has_option(self, section, option) for section in sections)
 
@@ -83,7 +84,7 @@ class BumprConfigParser(RawConfigParser):
             if RawConfigParser.has_option(self, section, option):
                 return RawConfigParser.getboolean(self, section, option)
 
-    def items(self, section: str):
+    def items(self, section: str) -> list[tuple[str, str]]:  # type: ignore
         for section in self.candidate_sections(section):
             if RawConfigParser.has_section(self, section):
                 return RawConfigParser.items(self, section)
