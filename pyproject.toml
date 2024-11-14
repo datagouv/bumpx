@@ -41,7 +41,7 @@ mkdocstrings = {version = ">=0.20.0,<0.21.0", optional = true}
 mkdocs-include-markdown-plugin = {version = "^3.2.3", optional = true}
 
 [tool.poetry.group.dev.dependencies]
-coverage = {extras = ["toml"], version = "^7.2.1"}
+coverage = "^7.2.1"
 invoke = "^1.6.0"
 mock = "^4.0.3"
 mypy = "^0.931"
@@ -53,25 +53,6 @@ ruff = "^0.6.8"
 
 [tool.poetry.scripts]
 bumpr = 'bumpr.__main__:main'
-
-[tool.poetry.extras]
-test = [
-  "mock",
-  "pytest",
-  "pytest-cov",
-  "pytest-mock",
-  "pytest-sugar",
-]
-lint = [
-  "mypy",
-  "ruff",
-]
-doc = [
-  "mkdocs",
-  "mkdocs-material",
-  "mkdocstrings",
-  "mkdocs-include-markdown-plugin",
-]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
