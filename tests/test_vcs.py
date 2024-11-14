@@ -9,13 +9,13 @@ from bumpx.vcs import BaseVCS, Bazaar, Git, Mercurial
 class BaseVCSTest:
     def test_execute_verbose(self, mocker):
         vcs = BaseVCS(verbose=True)
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         vcs.execute("cmd arg")
         execute.assert_called_with("cmd arg", verbose=True)
 
     def test_execute_quiet(self, mocker):
         vcs = BaseVCS(verbose=False)
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         vcs.execute("cmd arg")
         execute.assert_called_with("cmd arg", verbose=False)
 
@@ -25,7 +25,7 @@ class GitTest:
         workspace.mkdir(".git")
         git = Git()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "?? new.py"
         git.validate()
         execute.assert_called_with("git status --porcelain", verbose=False)
@@ -33,7 +33,7 @@ class GitTest:
     def test_validate_ko_not_git(self, workspace, mocker):
         git = Git()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         with pytest.raises(BumprError):
             git.validate()
         assert execute.called is False
@@ -42,7 +42,7 @@ class GitTest:
         workspace.mkdir(".git")
         git = Git()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "\n".join((" M modified.py", "?? new.py"))
         with pytest.raises(BumprError):
             git.validate()
@@ -51,7 +51,7 @@ class GitTest:
     def test_validate_not_clean_dryrun(self, workspace, mocker):
         workspace.mkdir(".git")
         git = Git()
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "\n".join((" M modified.py", "?? new.py"))
 
         git.validate(dryrun=True)
@@ -93,7 +93,7 @@ class MercurialTest:
         workspace.mkdir(".hg")
         mercurial = Mercurial()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "?? new.py"
         mercurial.validate()
         execute.assert_called_with("hg status -mard", verbose=False)
@@ -101,7 +101,7 @@ class MercurialTest:
     def test_validate_ko_not_mercurial(self, workspace, mocker):
         mercurial = Mercurial()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         with pytest.raises(BumprError):
             mercurial.validate()
         assert execute.called is False
@@ -110,7 +110,7 @@ class MercurialTest:
         workspace.mkdir(".hg")
         mercurial = Mercurial()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "\n".join((" M modified.py", "?? new.py"))
         with pytest.raises(BumprError):
             mercurial.validate()
@@ -120,7 +120,7 @@ class MercurialTest:
         workspace.mkdir(".hg")
         mercurial = Mercurial()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "\n".join((" M modified.py", "?? new.py"))
         mercurial.validate(dryrun=True)
         execute.assert_called_with("hg status -mard", verbose=False)
@@ -159,7 +159,7 @@ class BazaarTest:
         workspace.mkdir(".bzr")
         bazaar = Bazaar()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "? new.py"
         bazaar.validate()
         execute.assert_called_with("bzr status --short", verbose=False)
@@ -167,7 +167,7 @@ class BazaarTest:
     def test_validate_ko_not_bazaar(self, workspace, mocker):
         bazaar = Bazaar()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         with pytest.raises(BumprError):
             bazaar.validate()
         assert execute.called is False
@@ -176,7 +176,7 @@ class BazaarTest:
         workspace.mkdir(".bzr")
         bazaar = Bazaar()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "\n".join((" M modified.py", "? new.py"))
         with pytest.raises(BumprError):
             bazaar.validate()
@@ -186,7 +186,7 @@ class BazaarTest:
         workspace.mkdir(".bzr")
         bazaar = Bazaar()
 
-        execute = mocker.patch("bumpr.vcs.execute")
+        execute = mocker.patch("bumpx.vcs.execute")
         execute.return_value = "\n".join((" M modified.py", "? new.py"))
 
         bazaar.validate(dryrun=True)
@@ -209,7 +209,7 @@ class BazaarTest:
 
         record = caplog.record_tuples[0]
 
-        assert record[0] == "bumpr.vcs"
+        assert record[0] == "bumpx.vcs"
         assert record[1] == logging.WARNING
 
     def test_commit(self, mocker):
