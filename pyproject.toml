@@ -20,7 +20,7 @@ keywords = [
   "tag",
 ]
 readme = "README.md"
-repository = "https://github.com/noirbizarre/bumpr"
+repository = "https://github.com/datagouv/bumpx"
 documentation = "https://bumpr.readthedocs.io/en/stable/"
 include = [
   "README.md",
@@ -29,7 +29,7 @@ include = [
 ]
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/noirbizarre/bumpr/issues"
+"Bug Tracker" = "https://github.com/datagouv/bumpx/issues"
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
