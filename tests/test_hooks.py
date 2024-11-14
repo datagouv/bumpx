@@ -3,10 +3,10 @@ from textwrap import dedent
 
 import pytest
 
-from bumpr.config import Config, ObjectDict
-from bumpr.helpers import BumprError
-from bumpr.hooks import ChangelogHook, CommandsHook, ReadTheDocHook, ReplaceHook
-from bumpr.version import Version
+from bumpx.config import Config, ObjectDict
+from bumpx.helpers import BumprError
+from bumpx.hooks import ChangelogHook, CommandsHook, ReadTheDocHook, ReplaceHook
+from bumpx.version import Version
 
 
 class ReadTheDocHookDefaultTest:

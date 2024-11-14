@@ -2,8 +2,8 @@ import logging
 
 import pytest
 
-from bumpr.helpers import BumprError
-from bumpr.vcs import BaseVCS, Bazaar, Git, Mercurial
+from bumpx.helpers import BumprError
+from bumpx.vcs import BaseVCS, Bazaar, Git, Mercurial
 
 
 class BaseVCSTest:

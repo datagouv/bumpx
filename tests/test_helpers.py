@@ -2,7 +2,7 @@ from subprocess import CalledProcessError
 
 import pytest
 
-from bumpr.helpers import BumprError, check_output, execute
+from bumpx.helpers import BumprError, check_output, execute
 
 
 @pytest.fixture

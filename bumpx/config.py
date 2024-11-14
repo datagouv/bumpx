@@ -4,9 +4,9 @@ from configparser import RawConfigParser
 from os.path import exists
 from typing import Any
 
-from bumpr.helpers import ObjectDict
-from bumpr.hooks import HOOKS
-from bumpr.version import PARTS, Version
+from bumpx.helpers import ObjectDict
+from bumpx.hooks import HOOKS
+from bumpx.version import PARTS, Version
 
 logger = logging.getLogger(__name__)
 
@@ -198,7 +198,7 @@ class Config(ObjectDict):
 
     @classmethod
     def parse_args(cls, args=None):
-        from bumpr import __description__, __version__
+        from bumpx import __description__, __version__
 
         parser = argparse.ArgumentParser(description=__description__)
 

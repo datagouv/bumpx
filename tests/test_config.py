@@ -4,10 +4,10 @@ from textwrap import dedent
 
 import pytest
 
-from bumpr.config import DEFAULTS, Config, ValidationError
-from bumpr.config import __name__ as config_module_name
-from bumpr.hooks import HOOKS, ReadTheDocHook
-from bumpr.version import Version
+from bumpx.config import DEFAULTS, Config, ValidationError
+from bumpx.config import __name__ as config_module_name
+from bumpx.hooks import HOOKS, ReadTheDocHook
+from bumpx.version import Version
 
 
 @pytest.fixture
