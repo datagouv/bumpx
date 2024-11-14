@@ -1,6 +1,6 @@
 import logging
 
-from bumpr.log import DIFF, DRYRUN, BumprLogger
+from bumpx.log import DIFF, DRYRUN, BumprLogger
 
 
 def test_bumpr_logger(caplog):

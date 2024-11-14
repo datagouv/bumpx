@@ -1,4 +1,4 @@
-from bumpr.version import Version
+from bumpx.version import Version
 
 
 def test_default_constructor():
