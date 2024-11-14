@@ -32,5 +32,5 @@ separator =
 id = bumpr
 
 [replace]
-dev = ?branch=master
+dev = ?branch=main
 stable = ?tag={version}
