@@ -25,8 +25,8 @@ CLEAN_PATTERNS = [
 
 LINTERS = (
     ("pyproject.toml validation", "poetry check"),
-    ("Static Analysis", "ruff bumpr"),
-    ("Type checking", "mypy bumpr"),
+    ("Static Analysis", "ruff bumpx"),
+    ("Type checking", "mypy bumpx"),
 )
 FORMATTERS = (
     ("Sort imports using isort", "isort"),

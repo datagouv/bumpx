@@ -1,4 +1,4 @@
-# Code of Conduct - bumpr
+# Code of Conduct - bumpx
 
 ## Our Pledge
 

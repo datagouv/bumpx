@@ -59,7 +59,7 @@ def test_constructor_with_hooks(workspace, mocker):
         mock = mocker.MagicMock()
         mock.key = key
         hooks.append(mock)
-    mocker.patch("bumpr.releaser.HOOKS", hooks)
+    mocker.patch("bumpx.releaser.HOOKS", hooks)
 
     releaser = Releaser(config)
 
@@ -75,7 +75,7 @@ def test_test(workspace, mocker):
         }
     )
     releaser = Releaser(config)
-    execute = mocker.patch("bumpr.releaser.execute")
+    execute = mocker.patch("bumpx.releaser.execute")
 
     releaser.test()
 
@@ -93,7 +93,7 @@ def test_skip_test(workspace, mocker):
         }
     )
     releaser = Releaser(config)
-    execute = mocker.patch("bumpr.releaser.execute")
+    execute = mocker.patch("bumpx.releaser.execute")
 
     releaser.test()
 
@@ -109,7 +109,7 @@ def test_publish(workspace, mocker):
     )
 
     releaser = Releaser(config)
-    execute = mocker.patch("bumpr.releaser.execute")
+    execute = mocker.patch("bumpx.releaser.execute")
 
     releaser.publish()
 
@@ -129,7 +129,7 @@ def test_clean(workspace, mocker):
         }
     )
     releaser = Releaser(config)
-    execute = mocker.patch("bumpr.releaser.execute")
+    execute = mocker.patch("bumpx.releaser.execute")
 
     releaser.clean()
 
@@ -231,7 +231,7 @@ def test_push_no_commit(workspace, mocker):
 def test_release_wihtout_vcs_or_commands(workspace, mocker):
     config = Config({"file": "fake.py", "files": [str(workspace.readme)]})
     releaser = Releaser(config)
-    execute = mocker.patch("bumpr.releaser.execute")
+    execute = mocker.patch("bumpx.releaser.execute")
     commit = mocker.patch.object(releaser, "commit")
 
     releaser.release()
@@ -416,7 +416,7 @@ def test_release_dryrun(workspace, mocker):
         }
     )
     releaser = Releaser(config)
-    execute = mocker.patch("bumpr.releaser.execute")
+    execute = mocker.patch("bumpx.releaser.execute")
     vcs = mocker.patch.object(releaser, "vcs")
     releaser.release()
     assert not execute.called

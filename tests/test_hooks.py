@@ -141,21 +141,21 @@ class CommandsHookTest:
         self.hook = CommandsHook(self.releaser)
 
     def test_bump(self, mocker):
-        execute = mocker.patch("bumpr.hooks.execute")
+        execute = mocker.patch("bumpx.hooks.execute")
         self.hook.bump([])
         execute.assert_called_once_with(
             "bump command", replacements=mocker.ANY, verbose=mocker.ANY, dryrun=False
         )
 
     def test_prepare(self, mocker):
-        execute = mocker.patch("bumpr.hooks.execute")
+        execute = mocker.patch("bumpx.hooks.execute")
         self.hook.prepare([])
         execute.assert_called_once_with(
             "prepare command", replacements=mocker.ANY, verbose=mocker.ANY, dryrun=False
         )
 
     def test_bump_dryrun(self, mocker):
-        execute = mocker.patch("bumpr.hooks.execute")
+        execute = mocker.patch("bumpx.hooks.execute")
         self.hook.dryrun = True
         self.hook.bump([])
         execute.assert_called_once_with(
@@ -163,7 +163,7 @@ class CommandsHookTest:
         )
 
     def test_prepare_dryrun(self, mocker):
-        execute = mocker.patch("bumpr.hooks.execute")
+        execute = mocker.patch("bumpx.hooks.execute")
         self.hook.dryrun = True
         self.hook.prepare([])
         execute.assert_called_once_with(

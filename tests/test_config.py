@@ -24,7 +24,7 @@ def bumprc(request, mocker, mock_ini):
     marker = request.node.get_closest_marker("bumprc")
     if marker:
         data = marker.args[0]
-        mocker.patch("bumpr.config.exists", return_value=True)
+        mocker.patch("bumpx.config.exists", return_value=True)
         yield mock_ini(data)
     else:
         yield

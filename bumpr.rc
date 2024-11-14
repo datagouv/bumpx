@@ -1,4 +1,4 @@
-[bumpr]
+[bumpx]
 file = pyproject.toml
 regex = version\s*=\s*"(?P<version>.+?)"
 vcs = git
@@ -12,7 +12,7 @@ publish = poetry publish --build -vv -n
 clean = poetry run inv clean
 files =
     README.md
-    bumpr/__about__.py
+    bumpx/__about__.py
 
 [bump]
 unsuffix = true

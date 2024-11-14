@@ -29,7 +29,7 @@ Bump'X requires Python `>=3.9` (and `<4.0`)
 You can install Bump'X with pip:
 
 ```bash
-pip install bumpr
+pip install bumpx
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ pip install bumpr
 You can use directly the command line to setup every parameter:
 
 ```bash
-bumpr fake/__init__.py README.rst -M -ps dev
+bumpx fake/__init__.py README.rst -M -ps dev
 ```
 
 But Bump'X is designed to work with a configuration file (`bumpr.rc` by defaults).
@@ -50,7 +50,7 @@ Some features are only availables with the configuration file like:
 Here's an exemple:
 
 ```ini
-[bumpr]
+[bumpx]
 file = fake/__init__.py
 vcs = git
 tests = tox
@@ -81,13 +81,13 @@ This way you only have to specify which part you want to bump on the
 command line:
 
 ```bash
-bumpr -M  # Bump the major
-bumpr     # Bump the default part aka. patch
+bumpx -M  # Bump the major
+bumpx     # Bump the default part aka. patch
 ```
 
 ## Documentation
 
-The documentation for the upstream project [Bump'R](https://github.com/noirbizarre/bumpr) is hosted on Read the Docs:
+The documentation for the upstream project [Bump'X](https://github.com/datagouv/bumpx) is hosted on Read the Docs:
 
 - [Stable](https://bumpr.readthedocs.io/en/stable/) [![Stable documentation status](https://readthedocs.org/projects/bumpr/badge/?version=stable)](https://bumpr.readthedocs.io/en/stable/?badge=stable)
 - [Development](https://bumpr.readthedocs.io/en/latest/) [![Latest documentation Status](https://readthedocs.org/projects/bumpr/badge/?version=latest)](https://bumpr.readthedocs.io/en/latest/?badge=latest)

@@ -42,7 +42,7 @@ mkdocs-include-markdown-plugin = {version = "^3.2.3", optional = true}
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.2.1"
-invoke = "^1.6.0"
+invoke = "^2.2.0"
 mock = "^4.0.3"
 mypy = "^0.931"
 pytest = "^7.2.2"
@@ -52,7 +52,7 @@ pytest-sugar = "^0.9.4"
 ruff = "^0.7.3"
 
 [tool.poetry.scripts]
-bumpr = 'bumpr.__main__:main'
+bumpx = 'bumpx.__main__:main'
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -73,7 +73,7 @@ python_version = "3.11"
 exclude = "doc/*.py"
 
 [tool.coverage.run]
-source = ["bumpr"]
+source = ["bumpx"]
 branch = true
 omit = [
   "tests/*",
