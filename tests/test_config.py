@@ -14,9 +14,7 @@ from bumpx.version import Version
 def mock_ini(mocker):
     def inner(data):
         open_name = "{0}.open".format(config_module_name)
-        return mocker.patch(
-            open_name, return_value=io.StringIO(str(dedent(data))), create=True
-        )
+        return mocker.patch(open_name, return_value=io.StringIO(str(dedent(data))), create=True)
 
     return inner
 
@@ -191,9 +189,7 @@ class ConfigTest:
         assert config == expected
 
     def test_override_from_args(self):
-        config = Config.parse_args(
-            ["test.py", "-M", "-v", "-s", "test-suffix", "-c", "fake"]
-        )
+        config = Config.parse_args(["test.py", "-M", "-v", "-s", "test-suffix", "-c", "fake"])
 
         expected = deepcopy(DEFAULTS)
         expected["file"] = "test.py"
@@ -216,9 +212,7 @@ class ConfigTest:
     """
     )
     def test_override_args_keeps_config_values(self):
-        config = Config.parse_args(
-            ["test.py", "-M", "-v", "-s", "test-suffix", "-c", "test.rc"]
-        )
+        config = Config.parse_args(["test.py", "-M", "-v", "-s", "test-suffix", "-c", "test.rc"])
 
         expected = deepcopy(DEFAULTS)
         expected["file"] = "test.py"

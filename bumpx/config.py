@@ -71,9 +71,7 @@ class BumprConfigParser(RawConfigParser):
 
     def has_option(self, section, option):
         sections = self.candidate_sections(section)
-        return any(
-            RawConfigParser.has_option(self, section, option) for section in sections
-        )
+        return any(RawConfigParser.has_option(self, section, option) for section in sections)
 
     def get(self, section, option, **kwargs):
         for section in self.candidate_sections(section):
@@ -326,9 +324,7 @@ class Config(ObjectDict):
         )
 
         group = parser.add_argument_group("Version control system")
-        group.add_argument(
-            "--vcs", choices=["git", "hg"], default=None, help="VCS implementation"
-        )
+        group.add_argument("--vcs", choices=["git", "hg"], default=None, help="VCS implementation")
         group.add_argument(
             "-nc",
             "--nocommit",

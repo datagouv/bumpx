@@ -70,9 +70,7 @@ class GitTest:
 
         execute = mocker.patch.object(git, "execute")
         git.tag("fake", annotation="some annotation")
-        execute.assert_called_with(
-            ["git", "tag", "fake", "--annotate", "-m", '"some annotation"']
-        )
+        execute.assert_called_with(["git", "tag", "fake", "--annotate", "-m", '"some annotation"'])
 
     def test_commit(self, mocker):
         git = Git()

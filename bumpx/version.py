@@ -4,9 +4,7 @@ import re
 class Version:
     MAJOR, MINOR, PATCH = range(3)
 
-    PATTERN = re.compile(
-        r"(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(\.(?P<suffix>[\w\d.]+))?"
-    )
+    PATTERN = re.compile(r"(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(\.(?P<suffix>[\w\d.]+))?")
     FORMAT = r"{major}.{minor}.{patch}"
     FORMAT_SUFFIXED = r"{major}.{minor}.{patch}.{suffix}"
 
@@ -16,7 +14,7 @@ class Version:
         self.patch = int(patch)
         self.suffix = suffix
 
-    def bump(self, part=None, unsuffix: bool=True, suffix=None):
+    def bump(self, part=None, unsuffix: bool = True, suffix=None):
         if part is Version.MAJOR:
             self.major += 1
             self.minor = 0

@@ -313,9 +313,7 @@ def test_bump_vcs_with_annotation(workspace, mocker):
     releaser.bump()
 
     assert commit.call_count == 1
-    tag.assert_called_with(
-        str(releaser.version), "version {0}".format(releaser.version)
-    )
+    tag.assert_called_with(str(releaser.version), "version {0}".format(releaser.version))
 
     for file in workspace.module, workspace.readme:
         with file.open() as f:

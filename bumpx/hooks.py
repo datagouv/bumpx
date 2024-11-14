@@ -61,15 +61,11 @@ class ReadTheDocHook(Hook):
         return self.config.badge.format(id=self.config.id, tag=tag)
 
     def bump(self, replacements):
-        replacements.insert(
-            0, (self.badge("latest"), self.badge(self.releaser.tag_label))
-        )
+        replacements.insert(0, (self.badge("latest"), self.badge(self.releaser.tag_label)))
         replacements.insert(0, (self.url("latest"), self.url(self.releaser.tag_label)))
 
     def prepare(self, replacements):
-        replacements.insert(
-            0, (self.badge(self.releaser.tag_label), self.badge("latest"))
-        )
+        replacements.insert(0, (self.badge(self.releaser.tag_label), self.badge("latest")))
         replacements.insert(0, (self.url(self.releaser.tag_label), self.url("latest")))
 
 
@@ -94,9 +90,7 @@ class ChangelogHook(Hook):
             raise BumprError("Changelog file does not exists")
 
     def bump(self, replacements):
-        with open(
-            self.config.file, "r", encoding=self.releaser.config.encoding
-        ) as changelog_file:
+        with open(self.config.file, "r", encoding=self.releaser.config.encoding) as changelog_file:
             before = changelog_file.read()
             after = before.replace(self.dev_header(), self.bumped_header())
         self.releaser.perform(self.config.file, before, after)
@@ -111,9 +105,7 @@ class ChangelogHook(Hook):
                 self.bumped_header(),
             )
         )
-        with open(
-            self.config.file, "r", encoding=self.releaser.config.encoding
-        ) as changelog_file:
+        with open(self.config.file, "r", encoding=self.releaser.config.encoding) as changelog_file:
             before = changelog_file.read()
             after = before.replace(self.bumped_header(), next_header)
         self.releaser.perform(self.config.file, before, after)

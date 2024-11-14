@@ -25,9 +25,7 @@ class Releaser:
                 version_string = match.group("version")
                 self.prev_version = Version.parse(version_string)
             except Exception:
-                raise BumprError(
-                    "Unable to extract version from {0}".format(config.file)
-                )
+                raise BumprError("Unable to extract version from {0}".format(config.file))
 
         logger.debug("Previous version: {0}".format(self.prev_version))
 
@@ -36,17 +34,13 @@ class Releaser:
         logger.debug("Bumped version: {0}".format(self.version))
 
         self.next_version = self.version.copy()
-        self.next_version.bump(
-            config.prepare.part, config.prepare.unsuffix, config.prepare.suffix
-        )
+        self.next_version.bump(config.prepare.part, config.prepare.unsuffix, config.prepare.suffix)
         logger.debug("Prepared version: {0}".format(self.next_version))
 
         self.tag_label = self.config.tag_format.format(version=self.version)
         logger.debug("Tag: {0}".format(self.tag_label))
         if self.config.tag_annotation:
-            self.tag_annotation = self.config.tag_annotation.format(
-                version=self.version
-            )
+            self.tag_annotation = self.config.tag_annotation.format(version=self.version)
             logger.debug("Tag annotation: {0}".format(self.tag_annotation))
 
         self.timestamp = None
@@ -189,9 +183,7 @@ class Releaser:
                     self.vcs.tag(self.tag_label, self.tag_annotation)
                 else:
                     logger.dryrun(
-                        "tag: {0} annotation: {1}".format(
-                            self.tag_label, self.tag_annotation
-                        )
+                        "tag: {0} annotation: {1}".format(self.tag_label, self.tag_annotation)
                     )
             else:
                 logger.debug(f"Tag: {self.tag_label}")

@@ -1,8 +1,8 @@
 import logging
 import shlex
 import subprocess
-
 from typing import Any
+
 
 class BumprError(Exception):
     pass
@@ -15,7 +15,7 @@ def check_output(*args, **kwargs):
     )
 
 
-def execute(command, verbose: bool=False, replacements=None, dryrun: bool=False):
+def execute(command, verbose: bool = False, replacements=None, dryrun: bool = False):
     logger = logging.getLogger(__name__)
     replacements = replacements or {}
     if not command:
@@ -28,9 +28,7 @@ def execute(command, verbose: bool=False, replacements=None, dryrun: bool=False)
             commands.append([part.format(**replacements) for part in cmd])
     else:
         command = command.format(**replacements)
-        commands = [
-            shlex.split(cmd.strip()) for cmd in command.splitlines() if cmd.strip()
-        ]
+        commands = [shlex.split(cmd.strip()) for cmd in command.splitlines() if cmd.strip()]
 
     output = ""
     for cmd in commands:
@@ -46,9 +44,7 @@ def execute(command, verbose: bool=False, replacements=None, dryrun: bool=False)
                 print(exception.output)
             cmd = " ".join(cmd) if isinstance(cmd, (list, tuple)) else cmd
             raise BumprError(
-                'Command "{0}" failed with exit code {1}'.format(
-                    cmd, exception.returncode
-                )
+                'Command "{0}" failed with exit code {1}'.format(cmd, exception.returncode)
             )
     return output
 

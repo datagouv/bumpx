@@ -189,17 +189,13 @@ class ChangelogHookTest:
             ChangelogHook(self.releaser)
 
     def test_validate_file_does_not_exists(self, workspace):
-        self.releaser.config.__getitem__.return_value = ObjectDict(
-            {"file": "changelog"}
-        )
+        self.releaser.config.__getitem__.return_value = ObjectDict({"file": "changelog"})
         with pytest.raises(BumprError):
             ChangelogHook(self.releaser)
 
     def test_validate(self, workspace):
         workspace.write("changelog", "")
-        self.releaser.config.__getitem__.return_value = ObjectDict(
-            {"file": "changelog"}
-        )
+        self.releaser.config.__getitem__.return_value = ObjectDict({"file": "changelog"})
         ChangelogHook(self.releaser)
 
     def test_bump(self, workspace):
