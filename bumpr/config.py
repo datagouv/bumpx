@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import argparse
 import logging
 from configparser import RawConfigParser
@@ -59,14 +57,14 @@ class BumprConfigParser(RawConfigParser):
 
     prefix = "bumpr"
 
-    def candidate_sections(self, section):
+    def candidate_sections(self, section: str) -> list[str]:
         return [section, "{0}:{1}".format(self.prefix, section)]
 
-    def has_section(self, section):
+    def has_section(self, section: str) -> bool:
         sections = self.candidate_sections(section)
         return any(RawConfigParser.has_section(self, section) for section in sections)
 
-    def options(self, section):
+    def options(self, section: str) -> list[str]:
         for section in self.candidate_sections(section):
             if RawConfigParser.has_section(self, section):
                 return RawConfigParser.options(self, section)
@@ -85,7 +83,7 @@ class BumprConfigParser(RawConfigParser):
             if RawConfigParser.has_option(self, section, option):
                 return RawConfigParser.getboolean(self, section, option)
 
-    def items(self, section):
+    def items(self, section: str):
         for section in self.candidate_sections(section):
             if RawConfigParser.has_section(self, section):
                 return RawConfigParser.items(self, section)
@@ -111,7 +109,7 @@ class Config(ObjectDict):
                 self.override_from_config(parsed_args.config)
             self.override_from_args(parsed_args)
 
-    def override_from_config(self, filename):
+    def override_from_config(self, filename: str) -> None:
         config = BumprConfigParser()
         config.read_file(open(filename))
 

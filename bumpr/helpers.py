@@ -1,8 +1,7 @@
-from __future__ import annotations
-
 import logging
 import shlex
 import subprocess
+from typing import Any
 
 
 class BumprError(Exception):
@@ -16,7 +15,7 @@ def check_output(*args, **kwargs):
     )
 
 
-def execute(command, verbose=False, replacements=None, dryrun=False):
+def execute(command, verbose: bool = False, replacements=None, dryrun: bool = False):
     logger = logging.getLogger(__name__)
     replacements = replacements or {}
     if not command:
@@ -56,15 +55,15 @@ class ObjectDict(dict):
     def __init__(self, *args, **kwargs):
         self.update(*args, **kwargs)
 
-    def __getattr__(self, key):
+    def __getattr__(self, key: str):
         return self[key]
 
-    def __setattr__(self, key, value):
+    def __setattr__(self, key: str, value: Any) -> None:
         if isinstance(value, dict) and not isinstance(value, ObjectDict):
             value = ObjectDict(value)
         self[key] = value
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key: str, value):
         if isinstance(value, dict) and not isinstance(value, ObjectDict):
             value = ObjectDict(value)
         super(ObjectDict, self).__setitem__(key, value)

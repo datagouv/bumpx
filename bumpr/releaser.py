@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import logging
 import re
 from datetime import datetime
@@ -92,7 +90,7 @@ class Releaser:
             self.execute(self.config.tests, verbose=True)
 
     def bump(self):
-        logger.info("Bump version %s", self.version)
+        logger.info(f"Bump version {self.version}")
 
         replacements = [(str(self.prev_version), str(self.version))]
 
@@ -120,7 +118,7 @@ class Releaser:
         if self.version == self.next_version:
             logger.info("Skip prepare phase")
             return
-        logger.info("Prepare version %s", self.next_version)
+        logger.info(f"Prepare version {self.next_version}")
 
         replacements = [(str(self.version), str(self.next_version))]
 
@@ -180,7 +178,7 @@ class Releaser:
     def tag(self):
         if self.config.commit and self.config.tag:
             if self.config.tag_annotation:
-                logger.debug("Tag: %s Annotation: %s", self.tag_label, self.tag_annotation)
+                logger.debug(f"Tag: {self.tag_label} Annotation: {self.tag_annotation}")
                 if not self.config.dryrun:
                     self.vcs.tag(self.tag_label, self.tag_annotation)
                 else:
@@ -188,7 +186,7 @@ class Releaser:
                         "tag: {0} annotation: {1}".format(self.tag_label, self.tag_annotation)
                     )
             else:
-                logger.debug("Tag: %s", self.tag_label)
+                logger.debug(f"Tag: {self.tag_label}")
                 if not self.config.dryrun:
                     self.vcs.tag(self.tag_label)
                 else:
@@ -196,7 +194,7 @@ class Releaser:
 
     def commit(self, message):
         if self.config.commit:
-            logger.debug("Commit: %s", message)
+            logger.debug(f"Commit: {message}")
             if not self.config.dryrun:
                 self.vcs.commit(message)
             else:

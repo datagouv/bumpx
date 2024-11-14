@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import logging
 from os.path import exists
 from typing import TYPE_CHECKING

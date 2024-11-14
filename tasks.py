@@ -33,7 +33,7 @@ FORMATTERS = (
 )
 
 
-def color(code):
+def color(code: str) -> str:
     """A simple ANSI color wrapper factory"""
     return lambda t: "\033[{0}{1}\033[0;m".format(code, t)
 
@@ -46,39 +46,39 @@ purple = color("1;35m")
 white = color("1;39m")
 
 
-def header(text):
+def header(text: str) -> None:
     """Display an header"""
     print(" ".join((blue(">>"), cyan(text))))
     sys.stdout.flush()
 
 
-def info(text, *args, **kwargs):
+def info(text: str, *args, **kwargs) -> None:
     """Display informations"""
     text = text.format(*args, **kwargs)
     print(" ".join((purple(">>>"), text)))
     sys.stdout.flush()
 
 
-def success(text):
+def success(text: str) -> None:
     """Display a success message"""
     print(" ".join((green("✔"), white(text))))
     sys.stdout.flush()
 
 
-def error(text):
+def error(text: str) -> None:
     """Display an error message"""
     print(red("✘ {0}".format(text)))
     sys.stdout.flush()
 
 
-def exit(text=None, code=-1):
+def exit(text: str | None = None, code=-1) -> None:
     if text:
         error(text)
     sys.exit(code)
 
 
 @task
-def clean(ctx):
+def clean(ctx) -> None:
     """Cleanup all build artifacts"""
     header(clean.__doc__)
     with ctx.cd(ROOT):
@@ -88,7 +88,7 @@ def clean(ctx):
 
 
 @task
-def test(ctx, report=False, verbose=False):
+def test(ctx: str, report: bool = False, verbose: bool = False):
     """Run tests suite"""
     header(test.__doc__)
     cmd = ["pytest"]
@@ -101,7 +101,7 @@ def test(ctx, report=False, verbose=False):
 
 
 @task
-def cover(ctx, report=False, verbose=False):
+def cover(ctx, report: bool = False, verbose: bool = False) -> None:
     """Run tests suite with coverage"""
     header(cover.__doc__)
     cmd = [
@@ -122,7 +122,7 @@ def cover(ctx, report=False, verbose=False):
 
 
 @task
-def lint(ctx):
+def lint(ctx) -> None:
     """Run linters"""
     header(lint.__doc__)
     with ctx.cd(ROOT):
@@ -142,7 +142,7 @@ def lint(ctx):
 
 
 @task
-def format(ctx):
+def format(ctx) -> None:
     """Format code"""
     header(format.__doc__)
     with ctx.cd(ROOT):
@@ -152,14 +152,14 @@ def format(ctx):
 
 
 @task
-def tox(ctx):
+def tox(ctx) -> None:
     """Run test in all Python versions"""
     header(tox.__doc__)
     ctx.run("tox", pty=PTY)
 
 
 @task
-def doc(ctx, serve=False):
+def doc(ctx, serve: bool = False) -> None:
     """Build the documentation"""
     header(doc.__doc__)
     with ctx.cd(ROOT):
@@ -171,7 +171,7 @@ def doc(ctx, serve=False):
 
 
 @task
-def completion(ctx):
+def completion(ctx) -> None:
     """Generate bash completion script"""
     header(completion.__doc__)
     with ctx.cd(ROOT):
@@ -180,7 +180,7 @@ def completion(ctx):
 
 
 @task
-def dist(ctx):
+def dist(ctx) -> None:
     """Package for distribution"""
     header(dist.__doc__)
     with ctx.cd(ROOT):
@@ -189,6 +189,6 @@ def dist(ctx):
 
 
 @task(clean, lint, test, doc, dist, default=True)
-def all(ctx):
+def all(ctx) -> None:
     """Run all tasks (default)"""
     pass
