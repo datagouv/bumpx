@@ -32,7 +32,7 @@ include = [
 "Bug Tracker" = "https://github.com/datagouv/bumpx/issues"
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4.0"
+python = ">=3.9,<4.0"
 
 [tool.poetry.group.doc.dependencies]
 mkdocs = {version = "^1.2.3", optional = true}
