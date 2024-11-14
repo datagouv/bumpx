@@ -1,5 +1,5 @@
 """
-Bump'R: Version bumper and Python package releaser
+Bump'X: Version bumper and Python package releaser
 
 - Clean-up release artifact
 - Bump version and tag it

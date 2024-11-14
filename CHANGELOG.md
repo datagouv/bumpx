@@ -53,7 +53,7 @@
 - Add readthedoc badge support.
 - **Breaking** Use https and readthedocs.io as default
 - setup.cfg declaration support
-- Optionnal bumpr: prefix support
+- Optional bumpr: prefix support
 - Switch to pytest
 
 ## 0.2.1 (2015-11-21)
@@ -72,7 +72,7 @@
 - Ensure dry run does not write or execute anything
 - Better output and error handling
 - Group parameters in help
-- Added optionnal hook vaidation
+- Added optional hook vaidation
 - Fix some Python incompatibilities (Python 2.6 and 3.X)
 - More documentation
 

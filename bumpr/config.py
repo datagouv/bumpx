@@ -52,7 +52,7 @@ class ValidationError(ValueError):
 
 class BumprConfigParser(RawConfigParser):
     """
-    A config parser with optionnal implicit `bumpr:` prefix on sections.
+    A config parser with optional implicit `bumpr:` prefix on sections.
 
     Allow better isolation in setup.cfg.
     """

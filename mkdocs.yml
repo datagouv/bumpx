@@ -1,8 +1,8 @@
-site_name: Bump'R
+site_name: Bump'X
 
 # Repository
-repo_name: noirbizarre/bumpr
-repo_url: https://github.com/noirbizarre/bumpr
+repo_name: datagouv/bumpx
+repo_url: https://github.com/datagouv/bumpx
 
 theme:
   name: material

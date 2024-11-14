@@ -1,33 +1,32 @@
-# Bump'R: Bump and release versions
+# Bump'X: Bump and release versions
 
-[![Build Status](https://github.com/noirbizarre/bumpr/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/noirbizarre/bumpr/actions/workflows/main.yml)
-[![codecov](https://codecov.io/gh/noirbizarre/bumpr/branch/master/graph/badge.svg?token=G8u0QBT1Sj)](https://codecov.io/gh/noirbizarre/bumpr)
-[![Documentation Status](https://readthedocs.org/projects/bumpr/badge/?version=latest)](https://bumpr.readthedocs.io/en/latest/?badge=latest)
-![PyPI - Last version](https://img.shields.io/pypi/v/bumpr)
-![PyPI - License](https://img.shields.io/pypi/l/bumpr)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/bumpr)
+[![Build Status](https://github.com/datagouv/bumpx/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/datagouv/bumpx/actions/workflows/main.yml)
+![PyPI - Last version](https://img.shields.io/pypi/v/bumpx)
+![PyPI - License](https://img.shields.io/pypi/l/bumpx)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/bumpx)
 
-Bump'R is a version bumper and releaser allowing in a single command:
+Bump'X is a version bumper and releaser forked from [Bump'R](https://github.com/datagouv/bumpx).
+In a single CLI command, Bump'X can:
 
 - Clean-up release artifact
 - Bump version and tag it
 - Build a source distribution and upload on PyPI
 - Update version for a new development cycle
 
-Bump'R intend to be customizable with the following features:
+Bump'X intend to be customizable with the following features:
 
-- Optionnal test suite run before bump
+- Optional test suite run before bump
 - Customizable with a config file
 - Overridable by command line
 - Extensible with hooks
 
 ## Compatibility
 
-Bump'R requires Python `>=3.7` (and `<4.0`)
+Bump'X requires Python `>=3.7` (and `<4.0`)
 
 ## Installation
 
-You can install Bump'R with pip:
+You can install Bump'X with pip:
 
 ```bash
 pip install bumpr
@@ -41,7 +40,7 @@ You can use directly the command line to setup every parameter:
 bumpr fake/__init__.py README.rst -M -ps dev
 ```
 
-But Bump'R is designed to work with a configuration file (`bumpr.rc` by defaults).
+But Bump'X is designed to work with a configuration file (`bumpr.rc` by defaults).
 Some features are only availables with the configuration file like:
 
 - commit message customization
@@ -88,7 +87,7 @@ bumpr     # Bump the default part aka. patch
 
 ## Documentation
 
-The documentation is hosted on Read the Docs:
+The documentation for the upstream project [Bump'R](https://github.com/noirbizarre/bumpr) is hosted on Read the Docs:
 
 - [Stable](https://bumpr.readthedocs.io/en/stable/) [![Stable documentation status](https://readthedocs.org/projects/bumpr/badge/?version=stable)](https://bumpr.readthedocs.io/en/stable/?badge=stable)
 - [Development](https://bumpr.readthedocs.io/en/latest/) [![Latest documentation Status](https://readthedocs.org/projects/bumpr/badge/?version=latest)](https://bumpr.readthedocs.io/en/latest/?badge=latest)
