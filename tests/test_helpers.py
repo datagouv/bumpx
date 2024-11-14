@@ -12,7 +12,7 @@ def check_call(mocker):
 
 @pytest.fixture(name="check_output")
 def check_output_mock(mocker):
-    yield mocker.patch("bumpr.helpers.check_output")
+    yield mocker.patch("bumpx.helpers.check_output")
 
 
 class ExecuteTest:
