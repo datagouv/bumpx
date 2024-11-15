@@ -49,6 +49,10 @@ jobs:
       - name: Install Poetry
         uses: snok/install-poetry@v1
 
+      - name: Add poetry to path on windows
+        run: export PATH="/home/shell/.local/bin:$PATH"
+        if: runner.os != 'Windows'
+
       - name: Install project dependencies
         run: |
           # See: https://github.com/python-poetry/poetry/issues/4210
