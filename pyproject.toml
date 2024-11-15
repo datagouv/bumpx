@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bumpx"
-version = "0.3.9"
+version = "0.3.10"
 description = "Version bumper and Python package releaser"
 authors = ["data.gouv.fr <opendatateam@data.gouv.fr>"]
 license = "LGPL"

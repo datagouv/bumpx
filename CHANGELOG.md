@@ -2,6 +2,10 @@
 
 ## Current
 
+- Nothing yet
+
+## 0.3.10 (2024-11-15)
+
 - Update `pyproject.toml` for [Poetry >= 1.2.0](https://python-poetry.org/docs/managing-dependencies/)
 - Update some dependencies
 - Add [Ruff](https://astral.sh/ruff) as the linter, formatter and import sorter, to replace flake8, black and isort, while keeping the same linting and formatting rules as before (standard flake8/black rules, with extended line length)
