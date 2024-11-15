@@ -49,16 +49,20 @@ jobs:
       - name: Install Poetry
         uses: snok/install-poetry@v1
 
-      - name: Add poetry to path on windows
+      - name: Install project dependencies
         if: ${{ matrix.os == 'windows-latest' }}
-        run: echo "$HOME\.local\bin" >> "$GITHUB_PATH"
+        run: C:\Users\runneradmin\.local\bin\poetry install
 
       - name: Install project dependencies
-        run: |
-          # See: https://github.com/python-poetry/poetry/issues/4210
-          poetry install
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: poetry install
 
       - name: Run tests with coverage
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: C:\Users\runneradmin\.local\bin\poetry run inv cover --report
+
+      - name: Run tests with coverage
+        if: ${{ matrix.os != 'windows-latest' }}
         run: poetry run inv cover --report
 
       - name: Send coverage results to Codecov
