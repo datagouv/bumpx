@@ -50,7 +50,7 @@ jobs:
         uses: snok/install-poetry@v1
 
       - name: Add poetry to path on windows
-        if: ${{ matrix.os != 'windows-latest' }}
+        if: ${{ matrix.os == 'windows-latest' }}
         run: set PATH=%PATH%;C:\Users\runneradmin\.local\bin
 
       - name: Install project dependencies
