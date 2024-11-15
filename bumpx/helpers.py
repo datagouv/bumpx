@@ -45,9 +45,7 @@ def execute(
             if hasattr(exception, "output") and exception.output:
                 print(exception.output)
             cmd = " ".join(cmd) if isinstance(cmd, (list, tuple)) else cmd
-            raise BumprError(
-                'Command "{0}" failed with exit code {1}'.format(cmd, exception.returncode)
-            )
+            raise BumprError(f'Command "{cmd}" failed with exit code {exception.returncode}')
     return output
 
 

@@ -22,7 +22,9 @@ Bump'X intend to be customizable with the following features:
 
 ## Compatibility
 
-Bump'X requires Python `>=3.9` (and `<4.0`)
+Bump'X requires Python `>=3.9` (and `<4.0`).
+
+Bump'X also requires that you have [git CLI](https://git-scm.com/) and [GitHub CLI](https://cli.github.com/) installed on your system.
 
 ## Installation
 
@@ -53,6 +55,7 @@ Here's an exemple:
 [bumpx]
 file = fake/__init__.py
 vcs = git
+forge = github
 tests = tox
 publish = python setup.py sdist register upload
 clean =
@@ -83,6 +86,12 @@ command line:
 ```bash
 bumpx -M  # Bump the major
 bumpx     # Bump the default part aka. patch
+```
+
+If you use GitHub as a forge and publish release on it, you might have to specify which origin should be used to publish the releases, with:
+
+```bash
+gh repo set-default
 ```
 
 ## Documentation
