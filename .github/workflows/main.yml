@@ -38,9 +38,11 @@ jobs:
         python: ["3.9", "3.10", "3.11", "3.12"]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
 
@@ -48,11 +50,19 @@ jobs:
         uses: snok/install-poetry@v1
 
       - name: Install project dependencies
-        run: |
-          # See: https://github.com/python-poetry/poetry/issues/4210
-          poetry install
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: C:\Users\runneradmin\.local\bin\poetry install
+
+      - name: Install project dependencies
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: poetry install
 
       - name: Run tests with coverage
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: C:\Users\runneradmin\.local\bin\poetry run inv cover --report
+
+      - name: Run tests with coverage
+        if: ${{ matrix.os != 'windows-latest' }}
         run: poetry run inv cover --report
 
       - name: Send coverage results to Codecov
