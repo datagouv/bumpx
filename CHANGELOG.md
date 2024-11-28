@@ -2,7 +2,7 @@
 
 ## Current
 
-- Nothing yet
+- Add feature to publish a release to GitHub [#6](https://github.com/datagouv/bumpx/pull/6)
 
 ## 0.3.10 (2024-11-15)
 
