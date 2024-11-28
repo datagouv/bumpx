@@ -20,11 +20,8 @@ class BaseForge:
 
 
 class GitHub(BaseForge):
-    def release(self, version: str, notes: Optional[str] = None) -> None:
-        if notes:
-            self.execute(["gh", "release", "create", version, "--title", version, "--notes", notes])
-        else:
-            self.execute(["gh", "release", "create", version, "--title", version])
+    def release(self, version: str, notes: Optional[str] = "") -> None:
+        self.execute(["gh", "release", "create", version, "--title", version, "--notes", notes])
 
 
 class GitLab(BaseForge):
